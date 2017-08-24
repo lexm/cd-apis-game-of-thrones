@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+  <style type="text/css">
+    .top img{
+      height: 150px;
+      margin: auto;
+      display: block;
+    }
+    main{
+      border: 1px solid black;
+      padding: 20px;
+      margin-top: 50px;
+    }
+  </style>
+  <title>Game of Thrones</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('.top').on('click', 'img', function() {
+        var hname = $(this).attr('alt');
+        var url = 'https://www.anapioficeandfire.com/api/houses?name=' + hname;
+        $.get(url, function(data) {
+          console.log(data);
+          $('#house-name').text(data[0].name);
+          $('#house-words').text(data[0].words);
+          $('#titles').text(data[0].titles.join(', '));
+        })
+      })
+    });
+  </script>
+</head>
+<body>
+  <div class="top row">
+    <div id="stark" class="three columns">
+      <img src="img/House_Stark.svg" alt="House Stark of Winterfell">
+    </div>
+    <div id="targaryen" class="three columns">
+      <img src="img/House_Targaryen.svg" alt="House Targaryen of King's Landing">
+    </div>
+    <div id="lannister" class="three columns">
+      <img src="img/House_Lannister.svg" alt="House Lannister of Casterly Rock">
+    </div>
+    <div id="baratheon" class="three columns">
+      <img src="img/House_Baratheon.svg" alt="House Baratheon of Storm's End">
+    </div>
+  </div>
+  <main class="eight columns offset-by-two">
+    <h2>House Details</h2>
+    <p>Name: <span id="house-name"></span></p>
+    <p>Words: <span id="house-words"></span></p>
+    <p>Titles: <span id="titles"></span></p>
+  </main>
+</body>
+</html>
